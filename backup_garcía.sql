@@ -1,5 +1,6 @@
--- Este archivo .sql contiene un respaldo de las siguientes tablas: materials, depot_personnel, entry, orders, workers, outbound, maintenance_log, aircraft, deposit, audits_inspections_log, 
--- materials_in_deposit y aircraft_status.
+-- En este Backup incluyo las 12 tablas de mi base de datos con sus respectivos datos.
+-- Este archivo .sql contiene un respaldo de las siguientes tablas: materials, depot_personnel, entry, orders, workers, 
+-- outbound, maintenance_log, aircraft, deposit, audits_inspections_log, materials_in_deposit y aircraft_status.
 
 
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
