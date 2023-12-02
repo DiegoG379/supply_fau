@@ -594,3 +594,36 @@ END; //
 -- SELECT * FROM materials WHERE material_id = 1;
 -- INSERT INTO outbound (material_id, retirement_date, retirement_quantity, worker_id, depot_personnel_id) VALUES (1, '2023-09-15', 39, 7, 2)
 -- SELECT * FROM materials WHERE material_id = 1;
+
+
+
+-- INFORMES
+
+-- Informe mensual de stock retirado del depósito en el año 2023
+SELECT
+    MONTH(O.retirement_date) AS mes,
+    SUM(O.retirement_quantity) AS stock_retirado
+FROM
+    outbound O
+WHERE
+    YEAR(O.retirement_date) = 2023
+GROUP BY
+    MONTH(O.retirement_date)
+ORDER BY
+    MONTH(O.retirement_date);
+   
+
+-- Informe de Estado de Aeronaves
+SELECT
+    A.platform AS tipo_aeronave,
+    SUM(CASE WHEN ASL.status = 'Operativo' THEN 1 ELSE 0 END) AS volando,
+    SUM(CASE WHEN ASL.status = 'Inoperativo' THEN 1 ELSE 0 END) AS inoperativas,
+    SUM(CASE WHEN ASL.status = 'En Inspección' THEN 1 ELSE 0 END) AS en_mantenimiento
+FROM
+    aircraft A
+JOIN
+    aircraft_status ASL ON A.aircraft_id = ASL.aircraft_id
+WHERE
+    ASL.change_date = (SELECT MAX(change_date) FROM aircraft_status WHERE aircraft_id = A.aircraft_id)
+GROUP BY
+    A.platform;
